@@ -1,0 +1,54 @@
+// C++ code
+//
+#include <Adafruit_LiquidCrystal.h>
+
+
+int nedvesseg = 0;
+int gazSzint = 0;
+Adafruit_LiquidCrystal lcd_1(0);
+
+void setup()
+{
+  pinMode(LED_BUILTIN, OUTPUT);
+  
+  pinMode(A0, OUTPUT);
+  pinMode(A1, INPUT);
+  Serial.begin(9600);
+  
+}
+
+void loop()
+{
+  digitalWrite(A0, HIGH);
+  
+  delay(10);
+  
+  Serial.println(nedvesseg);
+  Serial.println(gazSzint, DEC); 
+    
+  delay(100);
+  
+  dataPrint();                        
+
+}
+
+void dataPrint()
+{
+  nedvesseg = analogRead(A1);
+  gazSzint = analogRead(A2);
+  
+  lcd_1.begin(16, 2);
+  
+  lcd_1.print("talaj nedv: ");
+  lcd_1.print(nedvesseg);
+  
+  
+  lcd_1.setCursor(0,1);
+  
+  lcd_1.print("CO2: ");
+  lcd_1.print(gazSzint);
+  
+  delay(5000);
+  lcd_1.clear();
+
+}
