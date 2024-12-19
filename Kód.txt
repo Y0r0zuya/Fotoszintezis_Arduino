@@ -28,7 +28,8 @@ void loop()
     
   delay(100);
   
-  dataPrint();                        
+  dataPrint();
+  openPumps();
 
 }
 
@@ -51,4 +52,18 @@ void dataPrint()
   delay(5000);
   lcd_1.clear();
 
+}
+
+void openPumps
+{
+  nedvesseg = analogRead(A1);
+  
+  if (nedvesseg < 100 && gazSzint > 700)
+
+    DigitalWrite(7, HIGH);
+  
+  else
+    
+    DigitalWrite(7, LOW);
+      
 }
