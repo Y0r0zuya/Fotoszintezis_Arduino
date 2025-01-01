@@ -1,4 +1,4 @@
-// C++ code
+// C++ code, Stumpf Máté Benedek - Fotoszintézis
 //
 #include <Adafruit_LiquidCrystal.h>
 
@@ -13,6 +13,8 @@ void setup()
   
   pinMode(A0, OUTPUT);
   pinMode(A1, INPUT);
+  pinMode(8, OUTPUT);
+  pinMode(7, OUTPUT);
   Serial.begin(9600);
   
 }
@@ -54,16 +56,28 @@ void dataPrint()
 
 }
 
-void openPumps
+void openPumps()
 {
   nedvesseg = analogRead(A1);
   
   if (nedvesseg < 100 && gazSzint > 700)
-
-    DigitalWrite(7, HIGH);
-  
+	{
+    digitalWrite(8, HIGH);
+  	digitalWrite(7, LOW);
+  	delay(5000);
+  	closePumps();
+    }
   else
+    digitalWrite(8, LOW);
+    digitalWrite(7, LOW);
+ 
+  
     
-    DigitalWrite(7, LOW);
-      
+}
+void closePumps()
+{
+  digitalWrite(8, LOW);
+  digitalWrite(7, HIGH);
+  delay(1000);
+  
 }
